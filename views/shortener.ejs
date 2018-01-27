@@ -1,0 +1,22 @@
+<html>
+
+<head>
+  <title>URL Shortener</title>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link href="/assets/styles.css" rel="stylesheet" type="text/css" /> -->
+  <script type="text/javascript" src="/assets/todo-list.js"></script>
+</head>
+
+<body>
+  <h1>URL Shortener</h1>
+  <div id="todo-table">
+    <form id="urlForm" method="POST" action="/s">
+      <input type="text" name="url" placeholder="url..." required/>
+      <button type="submit">shorten url.</button>
+    </form>
+  </div>
+  <p>
+    <a href='<%= data.shortenedUrl %>'><%= data.message %></a>
+  </p>
+</body>
+</html>
