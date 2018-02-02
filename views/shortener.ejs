@@ -2,21 +2,26 @@
 
 <head>
   <title>URL Shortener</title>
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link href="/assets/styles.css" rel="stylesheet" type="text/css" /> -->
-  <script type="text/javascript" src="/assets/todo-list.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+  <link href="/assets/styles.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-  <h1>URL Shortener</h1>
-  <div id="todo-table">
+  <div id="main">
+    <h1>URL Shortener</h1>
     <form id="urlForm" method="POST" action="/">
-      <input type="text" name="url" placeholder="url..." required/>
-      <button type="submit">shorten url.</button>
+      <input type="text" name="url" placeholder="" required/>
+      <button type="submit">></button>
     </form>
+    <p>
+      <% if (!data.message && !data.shortenedUrl) { %>
+        "Why say lot word when few do trick?"
+      <% } else if (!data.shortenedUrl) { %>
+        <%= data.message %>
+      <% } else { %>
+        <a href='<%= data.shortenedUrl %>'><%= data.shortenedUrl %></a>
+      <% } %>
+    </p>
   </div>
-  <p>
-    <a href='<%= data.shortenedUrl %>'><%= data.message %></a>
-  </p>
 </body>
 </html>

@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var urlExists = require('url-exists');
 
 var app = express();
+app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 redirect(app);
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -37,15 +38,17 @@ app.post('/', urlencodedParser, function(req, res) {
 
         var data = {};
         if (!url) {
-          data = {message: 'invalid url.', shortenedUrl: '/s'}
+          data = {message: 'Invalid URL.'};
           res.render('shortener', {data: data});
+
+
         } else {
           Shortened.find({}, function(err, data) {
             Shortened({key: data.length, url: url}).save(function(err, data) {
              if (err) throw err;
              var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
              var shortenedUrl = fullUrl + encode(data.key);
-             data = {message: shortenedUrl, shortenedUrl: shortenedUrl}
+             data = {shortenedUrl: shortenedUrl}
              res.render('shortener', {data: data});
             });
           });
