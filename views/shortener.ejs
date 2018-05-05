@@ -2,26 +2,29 @@
 
 <head>
   <title>URL Shortener</title>
-  <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Helvetica" rel="stylesheet">
   <link href="/assets/styles.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
   <div id="main">
-    <h1>URL Shortener</h1>
+    <!-- <h1>URL Shortener</h1> -->
     <form id="urlForm" method="POST" action="/">
-      <input type="text" name="url" placeholder="" required/>
-      <button type="submit">></button>
+      <input type="text" name="url" placeholder="<%= data.url || 'http://exmaple.com '%>" required autofocus/>
+      <button type="submit"><i class="material-icons md">arrow_forward</i></button>
     </form>
+
     <p>
       <% if (!data.message && !data.shortenedUrl) { %>
-        "Why say lot word when few do trick?"
+        Why waste time say lot word when few word do trick?
       <% } else if (!data.shortenedUrl) { %>
         <%= data.message %>
       <% } else { %>
-        <a href='<%= data.shortenedUrl %>'><%= data.shortenedUrl %></a>
+        <a target="_blank" href='<%= data.shortenedUrl %>'><%= data.shortenedUrl %></a>
       <% } %>
     </p>
   </div>
 </body>
+
 </html>

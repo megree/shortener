@@ -29,10 +29,10 @@ app.get('/', function(req, res) {
 app.post('/', urlencodedParser, function(req, res) {
   var url = '';
 
-  urlExists('http://' + req.body.url, function(err, exists) {
-    if (exists) url = 'http://' + req.body.url;
-    urlExists('https://' + req.body.url, function(err, exists) {
-      if (exists) url = 'https://' + req.body.url;
+  urlExists('https://' + req.body.url, function(err, exists) {
+    if (exists) url = 'https://' + req.body.url;
+    urlExists('http://' + req.body.url, function(err, exists) {
+      if (exists) url = 'http://' + req.body.url;
       urlExists(req.body.url, function(err, exists) {
         if (exists) url = req.body.url;
 
@@ -48,7 +48,7 @@ app.post('/', urlencodedParser, function(req, res) {
              if (err) throw err;
              var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
              var shortenedUrl = fullUrl + encode(data.key);
-             data = {shortenedUrl: shortenedUrl}
+             data = {shortenedUrl: shortenedUrl, url: data.url}
              res.render('shortener', {data: data});
             });
           });
@@ -69,7 +69,7 @@ app.get('/:codedKey', function(req, res) {
 });
 
 app.use(function(req, res, next) {
-  res.status(404);
+  // res.status(404);
   res.render('shortener', {data: {}});
 });
 
